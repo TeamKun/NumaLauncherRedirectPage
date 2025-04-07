@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NumaLauncher</title>
+  <link rel="icon" type="image/svg+xml" href="SealCircle.svg" />
+  <title>OpenNumaLauncher</title>
   <style>
     * {
       margin: 0;
@@ -52,7 +53,8 @@
     const messageBox = document.getElementById('messageBox');
 
     if (query) {
-      messageBox.innerText = "NumaLauncher を起動しています...";
+      messageBox.innerText = `NumaLauncher を起動しています...<br><br>
+        起動後、このページは閉じて問題ありません。`;
       setTimeout(() => {
         window.location.href = `numalauncher://?query=${query}`;
       }, 1000);
