@@ -32,13 +32,16 @@
     .message {
       background: white;
       display: inline-block;
-      padding: 1.5rem 2rem;
-      border-radius: 10px;
+      padding: 2rem;
+      border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       max-width: 500px;
     }
+    .message p {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
     .launch-button {
-      margin-top: 1.5rem;
       display: inline-block;
       background-color: #0078D7;
       color: white;
@@ -57,11 +60,11 @@
   <div class="container">
     <img src="SealCircle.svg" alt="NumaLauncher Logo" class="logo" />
     <div class="message" id="messageBox">
-      処理中です...
+      <p>処理中です...</p>
+      <a href="#" id="manualLaunchBtn" class="launch-button" style="display: none;">
+        手動で NumaLauncher を起動する
+      </a>
     </div>
-    <a href="#" id="manualLaunchBtn" class="launch-button" style="display: none;">
-      手動で NumaLauncher を起動する
-    </a>
   </div>
 
   <script>
@@ -71,22 +74,19 @@
     const manualBtn = document.getElementById('manualLaunchBtn');
 
     if (query) {
-      messageBox.innerHTML = `
+      messageBox.querySelector("p").innerHTML = `
         NumaLauncher を起動しています...<br><br>
         起動後、このページは閉じて問題ありません。
       `;
-
-      // 起動URLをセットしてボタン表示
       const launchURL = `numalauncher://?query=${encodeURIComponent(query)}`;
       manualBtn.href = launchURL;
       manualBtn.style.display = 'inline-block';
 
-      // 自動で起動
       setTimeout(() => {
         window.location.href = launchURL;
       }, 1000);
     } else {
-      messageBox.innerHTML = `
+      messageBox.querySelector("p").innerHTML = `
         <strong>エラー：</strong> クエリが指定されていません。<br><br>
         このページは閉じて問題ありません。
       `;
