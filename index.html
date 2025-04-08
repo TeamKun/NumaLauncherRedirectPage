@@ -37,6 +37,20 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       max-width: 500px;
     }
+    .launch-button {
+      margin-top: 1.5rem;
+      display: inline-block;
+      background-color: #0078D7;
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: background-color 0.2s ease;
+    }
+    .launch-button:hover {
+      background-color: #005fa3;
+    }
   </style>
 </head>
 <body>
@@ -45,18 +59,31 @@
     <div class="message" id="messageBox">
       処理中です...
     </div>
+    <a href="#" id="manualLaunchBtn" class="launch-button" style="display: none;">
+      手動で NumaLauncher を起動する
+    </a>
   </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('query');
     const messageBox = document.getElementById('messageBox');
+    const manualBtn = document.getElementById('manualLaunchBtn');
 
     if (query) {
-      messageBox.innerText = `NumaLauncher を起動しています...<br><br>
-        起動後、このページは閉じて問題ありません。`;
+      messageBox.innerHTML = `
+        NumaLauncher を起動しています...<br><br>
+        起動後、このページは閉じて問題ありません。
+      `;
+
+      // 起動URLをセットしてボタン表示
+      const launchURL = `numalauncher://?query=${encodeURIComponent(query)}`;
+      manualBtn.href = launchURL;
+      manualBtn.style.display = 'inline-block';
+
+      // 自動で起動
       setTimeout(() => {
-        window.location.href = `numalauncher://?query=${query}`;
+        window.location.href = launchURL;
       }, 1000);
     } else {
       messageBox.innerHTML = `
