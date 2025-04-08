@@ -60,7 +60,7 @@
   <div class="container">
     <img src="SealCircle.svg" alt="NumaLauncher Logo" class="logo" />
     <div class="message" id="messageBox">
-      <p>処理中です...</p>
+      <p></p>
       <a href="#" id="manualLaunchBtn" class="launch-button" style="display: none;">
         手動で NumaLauncher を起動する
       </a>
@@ -75,16 +75,13 @@
 
     if (query) {
       messageBox.querySelector("p").innerHTML = `
-        NumaLauncher を起動しています...<br><br>
+        表示されたダイアログからNumaLauncherを起動してください。<br><br>
         起動後、このページは閉じて問題ありません。
       `;
       const launchURL = `numalauncher://?query=${encodeURIComponent(query)}`;
       manualBtn.href = launchURL;
       manualBtn.style.display = 'inline-block';
-
-      setTimeout(() => {
-        window.location.href = launchURL;
-      }, 1000);
+      window.location.href = launchURL;
     } else {
       messageBox.querySelector("p").innerHTML = `
         <strong>エラー：</strong> クエリが指定されていません。<br><br>
